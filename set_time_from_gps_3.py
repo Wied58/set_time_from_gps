@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import serial
 import time
@@ -14,15 +14,15 @@ port = "/dev/serial0"
 
 ser = serial.Serial(port, baudrate = 9600, timeout = 0.5)
 
-print "Looking for GPS Data"
+print ("Looking for GPS Data")
 
 i = 0
 while i < 35:
    time.sleep(1.0)
-   data = ser.read_until() 
+   data = ser.read_until().decode('utf_8')
    sdata = data.split(",")
    if sdata[0] == '$GPRMC' and sdata[2] == 'V':
-	print sdata
+       	print (sdata)
    elif sdata[0] == '$GPRMC' and sdata[2] != 'V':
 
         sdate = sdata[9]
@@ -53,10 +53,10 @@ while i < 35:
         elif sdate[2:4] == '12':
         	smonth = "DEC"
         
-        print sdate[0:2] + " " + smonth + " " +"20"+ sdate[4:7] + " " + stime[0:2] + ":" + stime[2:4] + ":" + stime[4:6]
+        print (sdate[0:2] + " " + smonth + " " +"20"+ sdate[4:7] + " " + stime[0:2] + ":" + stime[2:4] + ":" + stime[4:6])
         date_time = sdate[0:2] + " " + smonth + " " +"20"+ sdate[4:7] + " " + stime[0:2] + ":" + stime[2:4] + ":" + stime[4:6]
         
-        print "Shutting down network time service" 
+        print ("Shutting down network time service")
         command = ['sudo', 'systemctl', 'stop', 'systemd-timesyncd.service']
         subprocess.call(command)
         
@@ -69,7 +69,7 @@ while i < 35:
         # restarted, the time will be proplerly set. 
         #time.sleep(5.0)
 
-        print "Setting time via GPS."
+        print ("Setting time via GPS.")
         syslog.syslog("Setting time via GPS") 
         command = ['sudo', 'date', '-s', date_time]
         subprocess.call(command)
@@ -81,7 +81,7 @@ while i < 35:
 
    i += 1
 
-print "restarting netwotk time servivce"
+print ("restarting netwotk time servivce")
 command = ['sudo', 'systemctl', 'start', 'systemd-timesyncd.service']
 subprocess.call(command)
 subprocess.call('date')
@@ -89,4 +89,4 @@ subprocess.call('date')
 
 
 
-print ""
+print ("")

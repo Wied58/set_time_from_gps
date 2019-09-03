@@ -12,7 +12,7 @@ Sets the system time with date -s
 
 Restarts the network time service - in case you are connected to a network.
 
-Write to /var/opt/syslog to indicate system time is set via GPS. 
+Writes to /var/opt/syslog to indicate system time is set via GPS. 
 
 To make use the of the script on boot:
 
