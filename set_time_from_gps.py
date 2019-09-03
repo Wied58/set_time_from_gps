@@ -3,13 +3,12 @@
 import serial
 import time
 import subprocess
- 
+import syslog
+syslog.syslog("This is a test message") 
 
 #output = subprocess.check_output("date", shell=True)
 #print output
 #Sat 16 Mar 02:45:17 UTC 2019
-
-
 
 
 
@@ -70,9 +69,10 @@ while i < 35:
         # This "holds" the GPS time for 5 seconds. 
         # If on a network the time will be set by the network, the GPS will set the time 5 seconds, but 5 seconds slow, then then when the network is
         # restarted, the time will be proplerly set. 
-        time.sleep(5.0)
+        #time.sleep(5.0)
 
         print "Setting time via GPS."
+        syslog.syslog("Setting time via GPS") 
         command = ['sudo', 'date', '-s', date_time]
         subprocess.call(command)
         

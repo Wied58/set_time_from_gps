@@ -12,10 +12,12 @@ Sets the system time with date -s
 
 Restarts the network time service - in case you are connected to a network.
 
+Write to /var/opt/syslog to indicate system time is set via GPS. 
+
 To make use the of the script on boot:
 
 Place a copy in /opt/set_time_from_gps/set_time_from_gps.py
 
 add the line "/opt/set_time_from_gps/set_time_from_gps.py" to /etc/rc.local as root (use sudo) prior to the exit 0 line.
 
-Future enhancements are to add logging and GPS checksum verification. 
+Future enhancements are to add GPS checksum verification. 
