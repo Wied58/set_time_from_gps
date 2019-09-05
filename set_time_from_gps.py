@@ -4,7 +4,7 @@ import serial
 import time
 import subprocess
 import syslog
-syslog.syslog("This is a test message") 
+syslog.syslog("Attempting to set time from GPS")
 
 #Sat 16 Mar 02:45:17 UTC 2019
 
